@@ -1,0 +1,62 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    padding: 30px;
+}
+
+header {
+    text-align: center;
+}
+
+h1 {
+    margin-bottom: 20px;
+}
+
+.block_post {
+    width: 100%;
+    margin-bottom: 20px;
+    border-bottom: 1px solid black;
+}
+
+.profile img {
+    width: 50px;
+    vertical-align: top;
+    margin-right: 20px;
+}
+
+.info {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.buttons {
+    float: right;
+}
+
+.text {
+    margin: 20px 0 20px 75px;
+}
+
+.buttons button {
+    display: block;
+    width: 130px;
+}
+
+.data_database {
+    display: flex;
+    flex-direction: column;
+}
+
+.data_database input,
+.data_database textarea {
+    margin-bottom: 20px;
+}
+
+.data_database button {
+    width: 130px;
+    align-self: center;
+}

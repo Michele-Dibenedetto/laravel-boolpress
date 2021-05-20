@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 
+use Illuminate\Support\Facades\Auth;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -23,3 +25,9 @@ Route::prefix('admin')
     ->group(function () {
         Route::get('/', 'HomeController@adminHome')->name('admin_homepage');
 });
+
+Route::prefix("posts")
+    ->group(function() {
+        Route::get("/", "PostController@index")->name("posts_page");
+        Route::get("/{slug}", "PostController@show")->name("post_page");
+    });

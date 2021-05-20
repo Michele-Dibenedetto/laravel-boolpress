@@ -19,12 +19,22 @@ class PostSeeder extends Seeder
     {
         for ($i = 0; $i < 4; $i++) {
             $newPost = new Post;
-            $newPost->nome = $faker->name();
             $newPost->data_publicazione = $faker->date();
             $newPost->immagine_profilo = $faker->imageUrl(640, 480);
             $newPost->testo = $faker->text();
             $newPost->titolo = $faker->sentence();
-            $newPost->slug = Str::slug($newPost->titolo, "-");
+
+            $slug = Str::slug($newPost->titolo, "-");
+            $slug_tmp = Post::where("slug", $slug)->first();
+            $c = 1;
+            while ($slug_tmp) {
+                $slug = $slug . "-" . $c;
+                $c++;
+                $slug_tmp = Post::where("slug", $slug)->first();
+            }
+            $newPost->slug = $slug;
+            
+            $newPost->user_id = $faker->numberBetween(1, 3);
             $newPost->save();
         }
     }
