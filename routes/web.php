@@ -17,6 +17,10 @@ use Illuminate\Support\Facades\Auth;
 
 Route::get('/', "HomeController@guestHome")->name("guest_homepage");
 
+Route::get("/posts", "PostController@index")->name("posts_page");
+
+Route::get("/posts/{slug}", "PostController@show")->name("post_page");
+
 Auth::routes();
 
 Route::prefix('admin')
@@ -24,10 +28,11 @@ Route::prefix('admin')
     ->middleware('auth')
     ->group(function () {
         Route::get('/', 'HomeController@adminHome')->name('admin_homepage');
+        Route::resource("/posts", "PostController");
 });
 
-Route::prefix("posts")
-    ->group(function() {
-        Route::get("/", "PostController@index")->name("posts_page");
-        Route::get("/{slug}", "PostController@show")->name("post_page");
-    });
+// Route::prefix("posts")
+//     ->group(function() {
+//         Route::get("/", "PostController@index")->name("posts_page");
+//         Route::get("/{slug}", "PostController@show")->name("post_page");
+//     });
