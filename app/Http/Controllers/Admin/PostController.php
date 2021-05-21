@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 
 use App\Post;
 use App\Tag;
+use App\Category;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\VarDumper\Cloner\Data;
 
@@ -32,8 +33,11 @@ class PostController extends Controller
      */
     public function create()
     {
-        $tags = Tag::all();
-        return view("admin.posts.create", compact("tags"));
+        $data = [
+            "tags" => Tag::all(),
+            "categories" => Category::all()
+        ];
+        return view("admin.posts.create", $data);
     }
 
     /**
@@ -63,6 +67,7 @@ class PostController extends Controller
         $newPost->slug = $slug;
 
         $newPost->user_id = Auth::id();
+        // $newPost->category_id = Auth::category();
         $newPost->save();
 
         if (array_key_exists("tags", $post)) {
@@ -82,7 +87,8 @@ class PostController extends Controller
     {
         $data = [
             "post" => $post,
-            "tags" => Tag::all()
+            "tags" => Tag::all(),
+            "category" => Category::all()
         ];
         return view("admin.posts.show", $data);
     }
