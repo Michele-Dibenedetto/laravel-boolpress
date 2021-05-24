@@ -29,10 +29,7 @@ Route::prefix('admin')
     ->group(function () {
         Route::get('/', 'HomeController@adminHome')->name('admin_homepage');
         Route::resource("/posts", "PostController");
+        Route::get("/user", "HomeController@user")->name("user_page");
+        Route::post("/user/generate_token", "HomeController@generatetoken")->name("user_generate_token");
 });
 
-// Route::prefix("posts")
-//     ->group(function() {
-//         Route::get("/", "PostController@index")->name("posts_page");
-//         Route::get("/{slug}", "PostController@show")->name("post_page");
-//     });
